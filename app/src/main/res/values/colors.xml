@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_white">#F5F4F2F2</color>
     <color name="lightpurple">#EA5D8D</color>
+    <color name="lightblue">#4183BE</color>
 
     <color name="greenpallete1">#FDE1EA</color>
     <color name="greenpallete2">#FDC7D9</color>

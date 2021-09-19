@@ -18,15 +18,16 @@
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/radio_unchecked.xml" value="0.2037037037037037" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/text_selector_color.xml" value="0.2037037037037037" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/textfield_background.xml" value="0.18888888888888888" />
-        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_home.xml" value="0.276885043263288" />
-        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_on_board_pager.xml" value="0.23098201936376211" />
-        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_onboardone.xml" value="0.27377049180327867" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_onboardthree.xml" value="0.20416666666666666" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_onboardtwo.xml" value="0.22" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/ParkingApp/app/src/main/res/menu/bottom_menu.xml" value="0.33" />
       </map>
     </option>

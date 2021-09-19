@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/parking_logo" />
+        app:srcCompat="@drawable/park_logo_blue" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -43,7 +43,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Search for parking"
-            android:textColor="@color/pink_light"
+            android:textColor="@color/lightblue"
             android:textSize="23sp"
             android:textStyle="bold" />
 

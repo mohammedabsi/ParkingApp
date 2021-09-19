@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_pager"
         app:progressMode="true"
-        app:selectedDotColor="@color/pink_light" />
+        app:selectedDotColor="@color/lightblue" />
 
     <TextView
         android:id="@+id/skip"
@@ -46,7 +46,7 @@
         android:layout_marginBottom="6dp"
         android:onClick="goLogin"
         android:text="Skip"
-        android:textColor="@color/pink_light"
+        android:textColor="@color/lightblue"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

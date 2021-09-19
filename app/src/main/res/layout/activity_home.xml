@@ -10,8 +10,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="match_parent"
         android:layout_gravity="top"
 
         >
@@ -369,6 +368,7 @@
         android:layout_gravity="bottom"
         android:background="@color/light_white"
         app:fabCradleMargin="5dp"
+
         app:fabCradleVerticalOffset="10dp"
         app:fabCradleRoundedCornerRadius="10dp">
 
@@ -379,6 +379,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             app:labelVisibilityMode="selected"
+
             android:background="@android:color/transparent"
             app:menu="@menu/bottom_menu"
             app:itemRippleColor="@color/greenpallete1"
@@ -394,7 +395,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/pink_light"
+        android:backgroundTint="@color/lightblue"
         android:elevation="5dp"
         android:src="@drawable/ic__add_location"
         app:borderWidth="0dp"

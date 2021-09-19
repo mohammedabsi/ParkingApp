@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registerConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    android:id="@+id/registerConstraintLayout"
     tools:context=".RegisterActivity">
 
     <ImageView
@@ -13,7 +13,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_margin="16dp"
-        android:src="@drawable/parking_logo"
+        android:src="@drawable/park_logo_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -97,11 +97,11 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose one :"
-                />
+                android:text="Choose one :" />
 
 
             <RadioButton
@@ -176,7 +176,6 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeColor="@color/pink_light"
             app:boxStrokeErrorColor="#B61B55"
             app:boxStrokeWidthFocused="2dp"
             app:helperTextTextColor="#9C8585"
@@ -267,7 +266,6 @@
     <!--    </LinearLayout>-->
 
 
-
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
@@ -292,7 +290,7 @@
             android:layout_marginStart="5dp"
             android:onClick="returnLogin"
             android:text="Login Now"
-            android:textColor="@color/lightpurple"
+            android:textColor="@color/lightblue"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -316,7 +314,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/pink_light"
+        android:background="@color/lightblue"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

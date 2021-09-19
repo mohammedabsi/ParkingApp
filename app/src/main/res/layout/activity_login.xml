@@ -13,7 +13,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_margin="16dp"
-        android:src="@drawable/parking_logo"
+        android:src="@drawable/park_logo_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -209,7 +209,7 @@
             android:layout_marginStart="5dp"
             android:onClick="returnRegister"
             android:text="Register"
-            android:textColor="@color/lightpurple"
+            android:textColor="@color/lightblue"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="@+id/textView5" />
