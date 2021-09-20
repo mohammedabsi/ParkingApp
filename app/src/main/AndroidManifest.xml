@@ -8,7 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/parking_logo"
+        android:icon="@drawable/park_logo_blue"
         android:usesCleartextTraffic="true"
 
         android:label="@string/app_name"
