@@ -9,14 +9,16 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/park_logo_blue"
-        android:usesCleartextTraffic="true"
-
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.ParkingApp"
+        android:usesCleartextTraffic="true"
         tools:replace="android:supportsRtl">
+        <activity
+            android:name=".AdminMainActivity"
+            android:exported="true" />
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />

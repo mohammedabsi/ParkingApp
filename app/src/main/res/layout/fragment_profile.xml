@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
+    android:layout_margin="8dp"
+    tools:context=".ProfileFragment">
+
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/profile_photo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/user"
+            app:civ_border_color="@color/pink_light"
+            app:civ_border_width="1dp"
+            app:civ_shadow="true"
+            app:civ_shadow_color="#3f51b5"
+            app:civ_shadow_radius="5" />
+
+        <ImageView
+
+            android:id="@+id/edit_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_camera"
+            app:tint="@color/purple_700" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/profile_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type:"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/lightpurple"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:startIconDrawable="@drawable/ic_profile_circle"
+        app:startIconTint="@color/darkgrey"
+        tools:layout_editor_absoluteX="5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/textfield_blural"
+            android:gravity="start|center"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:startIconDrawable="@drawable/ic_email"
+        app:startIconTint="@color/darkgrey"
+        tools:layout_editor_absoluteX="5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/textfield_blural"
+            android:gravity="start|center"
+
+            android:inputType="phone" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/darkgrey"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconTint="@color/darkgrey"
+        tools:layout_editor_absoluteX="5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/textfield_blural"
+            android:gravity="start|center"
+
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout4"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:startIconDrawable="@drawable/ic_id_card"
+        app:startIconTint="@color/darkgrey"
+        tools:layout_editor_absoluteX="5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/textfield_blural"
+            android:focusable="false"
+            android:gravity="start|center"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/progressBarprofile"
+        tools:layout_editor_absoluteX="5dp">
+
+        <Button
+
+            android:id="@+id/update_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:elevation="5dp"
+            android:padding="5dp"
+            android:text="update profile"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/lightblue"
+            />
+
+        <Button
+
+            android:id="@+id/sign_out"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/darkgrey"
+            android:elevation="5dp"
+            android:padding="5dp"
+            android:text="sign out"
+            android:textSize="12sp"
+            android:textColor="@android:color/white" />
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarprofile"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
