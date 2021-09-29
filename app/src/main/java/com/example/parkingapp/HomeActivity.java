@@ -2,55 +2,40 @@ package com.example.parkingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 public class HomeActivity extends AppCompatActivity {
-   private BottomNavigationView bottomNavigationView;
-    private CoordinatorLayout homeContainer ;
-    private FloatingActionButton fab;
-    private BottomAppBar bottomAppBar ;
+    private BottomNavigationView bottomNavigationView;
+    private FrameLayout home_fragment_container;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        fab = findViewById(R.id.fab);
-        homeContainer = findViewById(R.id.homeContainer);
 
-        Snackbar snackbar = Snackbar.make(homeContainer, "Login success", Snackbar.LENGTH_LONG);
-        snackbar.setAnchorView(R.id.fab);
-        snackbar.show();
-        bottomNavigationView = findViewById(R.id.bottomBar);
+        home_fragment_container = findViewById(R.id.home_fragment_container);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment_container,
-                        new HomeFragment()).commit();
-            }
-        });
+
+        Toast.makeText(HomeActivity.this, "Login success", Toast.LENGTH_SHORT).show();
+        bottomNavigationView = findViewById(R.id.bottomNavBar);
+
 
         bottomNavigationView.setBackground(null);
-        bottomNavigationView.findViewById(R.id.nav_home).setVisibility(View.GONE);
-        bottomNavigationView.getMenu().getItem(1 ).setEnabled(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
 
-
         //I added this if statement to keep the selected fragment when rotating the device
         if (savedInstanceState == null) {
+            bottomNavigationView.getMenu().getItem(1).setChecked(true);
             getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment_container,
                     new HomeFragment()).commit();
         }
@@ -67,13 +52,16 @@ public class HomeActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
 
                         case R.id.nav_news:
+
                             selectedFragment = new NewsFragment();
                             break;
                         case R.id.nav_profile:
+
                             selectedFragment = new ProfileFragment();
                             break;
                         case R.id.nav_home:
-
+                            selectedFragment = new HomeFragment();
+                            break;
 
 
                     }

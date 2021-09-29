@@ -9,8 +9,10 @@
 
          />
     <item
+        android:title="parking"
         android:id="@+id/nav_home"
-        android:iconTint="@color/pink_light"
+        android:icon="@drawable/ic_parking"
+
 
         />
 

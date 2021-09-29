@@ -18,7 +18,10 @@
         tools:replace="android:supportsRtl">
         <activity
             android:name=".AdminMainActivity"
-            android:exported="true" />
+            android:exported="true" >
+
+
+        </activity>
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
@@ -28,15 +31,20 @@
         <activity
             android:name=".SplashScreen"
             android:exported="true">
+
+            <!--todo : here is the launcher  -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
+            android:exported="true" >
+
+
+
+        </activity>
         <activity android:name=".OnBoardActivity" />
     </application>
 

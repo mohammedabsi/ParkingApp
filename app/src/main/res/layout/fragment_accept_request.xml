@@ -4,27 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".AdminMainActivity">
+    tools:context=".AcceptRequestFragment">
 
-
-    <FrameLayout
-        android:id="@+id/Admin_fragment_container"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/accept_requests_recycler"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:background="#F6F5F5"
-        app:layout_constraintBottom_toTopOf="@+id/bottomAdminNavbar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomAdminNavbar"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:labelVisibilityMode="selected"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/admin_menu" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

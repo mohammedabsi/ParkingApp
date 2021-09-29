@@ -15,25 +15,33 @@
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/ic_news.xml" value="0.2203125" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/ic_parking.xml" value="0.18888888888888888" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/ic_profile_circle.xml" value="0.18888888888888888" />
+        <entry key="..\:/ParkingApp/app/src/main/res/drawable/ic_resource_false.xml" value="0.2203125" />
+        <entry key="..\:/ParkingApp/app/src/main/res/drawable/ic_true.xml" value="0.2203125" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/ic_university_id.xml" value="0.18888888888888888" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/radio_checked.xml" value="0.2037037037037037" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/radio_selector.xml" value="0.2037037037037037" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/radio_unchecked.xml" value="0.2037037037037037" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/text_selector_color.xml" value="0.2037037037037037" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/textfield_background.xml" value="0.18888888888888888" />
-        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_admin_main.xml" value="0.25" />
-        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_admin_main.xml" value="0.22" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_home.xml" value="0.21" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_on_board_pager.xml" value="0.23098201936376211" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
-        <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_accept_request.xml" value="0.1875" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_add_news.xml" value="0.20416666666666666" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_news.xml" value="0.20416666666666666" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_onboardone.xml" value="0.27377049180327867" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_onboardthree.xml" value="0.20416666666666666" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_onboardtwo.xml" value="0.22" />
-        <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/single_news_item.xml" value="0.33" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/single_request_row.xml" value="0.28342245989304815" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/splash_screen.xml" value="0.20416666666666666" />
+        <entry key="..\:/ParkingApp/app/src/main/res/menu/admin_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/ParkingApp/app/src/main/res/menu/bottom_menu.xml" value="0.33" />
       </map>
     </option>

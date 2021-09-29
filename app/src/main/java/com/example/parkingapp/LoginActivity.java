@@ -57,6 +57,12 @@ public class LoginActivity extends AppCompatActivity {
             password_login.setError("Enter your password");
             return;
         }
+
+        if (email.equalsIgnoreCase("admin@admin.com")&& password.equalsIgnoreCase("admin")){
+
+            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+            finish();
+        }
         progressBarlogin.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -64,9 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
 
                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-
-
-
                     finish();
                 } else {
                     Snackbar snackbar = Snackbar.make(loginConstraintLayout, "Login Failed , try again", Snackbar.LENGTH_LONG);

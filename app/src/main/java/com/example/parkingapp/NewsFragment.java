@@ -3,10 +3,14 @@ package com.example.parkingapp;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +27,9 @@ public class NewsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView newsRecyclerView;
+    ArrayList<NewsModel> newsModelArrayList ;
+
 
     public NewsFragment() {
         // Required empty public constructor
@@ -57,8 +64,36 @@ public class NewsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false);
+        View view =inflater.inflate(R.layout.fragment_news, container, false);
+
+        newsRecyclerView =view.findViewById(R.id.news_recyclerview);
+        newsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        newsModelArrayList= new ArrayList<>();
+        NewsModel obj1 = new NewsModel(R.drawable.ic_parking , "new1" , "descripton 1" );
+        newsModelArrayList.add(obj1);
+
+        NewsModel obj2 = new NewsModel(R.drawable.ic_parking , "new2" , "descripton 2" );
+        newsModelArrayList.add(obj2);
+
+        NewsModel obj3 = new NewsModel(R.drawable.ic_parking , "new3" , "descripton 3" );
+        newsModelArrayList.add(obj3);
+        NewsModel obj4 = new NewsModel(R.drawable.ic_parking , "new4" , "descripton 4" );
+        newsModelArrayList.add(obj4);
+
+        NewsModel obj5 = new NewsModel(R.drawable.ic_parking , "new5" , "descripton 5" );
+        newsModelArrayList.add(obj5);
+        NewsModel obj6 = new NewsModel(R.drawable.ic_parking , "new6" , "descripton 6" );
+        newsModelArrayList.add(obj6);
+        NewsModel obj7 = new NewsModel(R.drawable.ic_parking , "new7" , "descripton 7" );
+        newsModelArrayList.add(obj7);
+
+
+        newsRecyclerView.setAdapter(new newsAdapter(newsModelArrayList));
+
+
+        return view ;
     }
 }
