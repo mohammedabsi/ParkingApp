@@ -123,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
                         User studentSide = new User(username, user_id, password, email, false);
 
-                        firestore.collection("Users").document("Student Side").collection(FirebaseAuth.getInstance().getCurrentUser().getUid()).document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).set(studentSide).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firestore.collection("Student Side").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(studentSide).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -147,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
                         User teacherSide = new User(username, user_id, password, email, true);
                         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-                        firestore.collection("Users").document("Teacher Side").collection(FirebaseAuth.getInstance().getCurrentUser().getUid()).document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).set(teacherSide).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firestore.collection("Teacher_Side").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(teacherSide).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {

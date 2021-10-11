@@ -169,6 +169,7 @@
             android:elevation="5dp"
             android:layout_gravity="center"
             android:padding="5dp"
+            android:visibility="invisible"
             android:text="update profile"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
