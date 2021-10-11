@@ -13,8 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:background="@color/lightblue"
-        android:src="@drawable/ic_parking" />
+         />
 
     <TextView
         android:id="@+id/news_header"

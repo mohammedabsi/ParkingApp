@@ -13,7 +13,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
-        android:style="@style/ButtonStlye123"
+<!--        android:style="@style/ButtonStlye123"-->
+<!--        <item name="titleTextColor">@color/white</item>-->
 
     </style>
 

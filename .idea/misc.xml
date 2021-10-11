@@ -23,7 +23,7 @@
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/radio_unchecked.xml" value="0.2037037037037037" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/text_selector_color.xml" value="0.2037037037037037" />
         <entry key="..\:/ParkingApp/app/src/main/res/drawable/textfield_background.xml" value="0.18888888888888888" />
-        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_admin_main.xml" value="0.22" />
+        <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_admin_main.xml" value="0.2" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_home.xml" value="0.21" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -41,8 +41,10 @@
         <entry key="..\:/ParkingApp/app/src/main/res/layout/single_news_item.xml" value="0.33" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/single_request_row.xml" value="0.28342245989304815" />
         <entry key="..\:/ParkingApp/app/src/main/res/layout/splash_screen.xml" value="0.20416666666666666" />
+        <entry key="..\:/ParkingApp/app/src/main/res/menu/actionbar_menu.xml" value="0.22" />
         <entry key="..\:/ParkingApp/app/src/main/res/menu/admin_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/ParkingApp/app/src/main/res/menu/bottom_menu.xml" value="0.33" />
+        <entry key="..\:/ParkingApp/app/src/main/res/xml/networksecurityconfig.xml" value="0.1" />
       </map>
     </option>
   </component>

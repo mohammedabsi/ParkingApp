@@ -83,8 +83,7 @@ public class AcceptRequestFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_accept_request, container, false);
         accept_requests_recycler = view.findViewById(R.id.accept_requests_recycler);
         accept_requests_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        Context context;
-        progressDialog = new ProgressDialog(getActivity());
+       progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching data");
         progressDialog.show();

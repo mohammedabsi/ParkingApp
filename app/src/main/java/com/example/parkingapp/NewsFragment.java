@@ -1,14 +1,23 @@
 package com.example.parkingapp;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -28,8 +37,10 @@ public class NewsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private RecyclerView newsRecyclerView;
-    ArrayList<NewsModel> newsModelArrayList ;
-
+    private UploadNewAdapter mUploadNewAdapter;
+    private ArrayList<AddNew> newsModelArrayList;
+    private FirebaseFirestore mFirebaseFirestore;
+    ProgressDialog progressDialog;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -64,36 +75,63 @@ public class NewsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        newsRecyclerView =view.findViewById(R.id.news_recyclerview);
+        newsRecyclerView = view.findViewById(R.id.news_recyclerview);
         newsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        newsModelArrayList= new ArrayList<>();
-        NewsModel obj1 = new NewsModel(R.drawable.ic_parking , "new1" , "descripton 1" );
-        newsModelArrayList.add(obj1);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Fetching data");
+        progressDialog.show();
+        newsRecyclerView.setHasFixedSize(true);
 
-        NewsModel obj2 = new NewsModel(R.drawable.ic_parking , "new2" , "descripton 2" );
-        newsModelArrayList.add(obj2);
-
-        NewsModel obj3 = new NewsModel(R.drawable.ic_parking , "new3" , "descripton 3" );
-        newsModelArrayList.add(obj3);
-        NewsModel obj4 = new NewsModel(R.drawable.ic_parking , "new4" , "descripton 4" );
-        newsModelArrayList.add(obj4);
-
-        NewsModel obj5 = new NewsModel(R.drawable.ic_parking , "new5" , "descripton 5" );
-        newsModelArrayList.add(obj5);
-        NewsModel obj6 = new NewsModel(R.drawable.ic_parking , "new6" , "descripton 6" );
-        newsModelArrayList.add(obj6);
-        NewsModel obj7 = new NewsModel(R.drawable.ic_parking , "new7" , "descripton 7" );
-        newsModelArrayList.add(obj7);
+        mFirebaseFirestore = FirebaseFirestore.getInstance();
+        newsModelArrayList = new ArrayList<AddNew>();
 
 
-        newsRecyclerView.setAdapter(new newsAdapter(newsModelArrayList));
+
+        RetrieveNewsData();
+        mUploadNewAdapter = new UploadNewAdapter(getActivity().getApplicationContext(), newsModelArrayList);
+        newsRecyclerView.setAdapter(mUploadNewAdapter);
 
 
-        return view ;
+
+
+
+        return view;
+    }
+
+    public void RetrieveNewsData() {
+
+        mFirebaseFirestore.collection("News").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                    Log.d("fireStore Error", error.getMessage().toString());
+                    return;
+                }
+                for (DocumentChange documentChange : value.getDocumentChanges()) {
+                    if (documentChange.getType() == DocumentChange.Type.ADDED) {
+
+                        newsModelArrayList.add(documentChange.getDocument().toObject(AddNew.class));
+
+                    }
+                    mUploadNewAdapter.notifyDataSetChanged();
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+
+
+                }
+
+
+            }
+        });
+
     }
 }

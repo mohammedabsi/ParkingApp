@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="Add Description"
-        android:lines="5"
-        app:layout_constraintBottom_toTopOf="@+id/add_image"
+        android:maxLines="6"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,15 +37,26 @@
         android:id="@+id/add_image"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:background="@color/lightblue"
         android:elevation="5dp"
         android:outlineAmbientShadowColor="@color/darkgrey"
-        android:src="@drawable/ic_parking"
+        android:src="@drawable/park_logo_blue"
         app:layout_constraintBottom_toTopOf="@+id/submit_news"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_description" />
+
+    <ProgressBar
+        android:id="@+id/progressBarAdminAddnews"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_image" />
 
     <Button
         android:id="@+id/submit_news"
@@ -53,6 +64,7 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:textSize="13sp"
+
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/add_image"

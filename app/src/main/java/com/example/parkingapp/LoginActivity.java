@@ -19,11 +19,16 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.w3c.dom.Document;
 
 public class LoginActivity extends AppCompatActivity {
     private TextInputEditText email_login, password_login;
     private ProgressBar progressBarlogin;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore mfirebaseFirestore;
     private ConstraintLayout loginConstraintLayout;
 
     @Override
@@ -43,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void goHome(View view) {
         closeKeyboard();
+        mfirebaseFirestore = FirebaseFirestore.getInstance();
+
 
         String email = email_login.getText().toString().trim();
         String password = password_login.getText().toString().trim();
@@ -58,19 +65,20 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if (email.equalsIgnoreCase("admin@admin.com")&& password.equalsIgnoreCase("admin")){
 
-            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
-            finish();
-        }
         progressBarlogin.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    if (email.equalsIgnoreCase("admin@admin.com") && password.equalsIgnoreCase("admin123")) {
 
+                        startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+                        finish();
+                    }else {
                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     finish();
+                    }
                 } else {
                     Snackbar snackbar = Snackbar.make(loginConstraintLayout, "Login Failed , try again", Snackbar.LENGTH_LONG);
                     snackbar.show();

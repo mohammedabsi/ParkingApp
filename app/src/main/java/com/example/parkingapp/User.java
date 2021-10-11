@@ -1,7 +1,7 @@
 package com.example.parkingapp;
 
 public class User {
-    public String  username , email , password , userId ;
+    public String  username , email , password , userId  ;
     public Boolean type ;
     public User (){
 
