@@ -80,11 +80,13 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
         newsRecyclerView = view.findViewById(R.id.news_recyclerview);
+
         newsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching data");
         progressDialog.show();
+
         newsRecyclerView.setHasFixedSize(true);
 
         mFirebaseFirestore = FirebaseFirestore.getInstance();
@@ -118,9 +120,11 @@ public class NewsFragment extends Fragment {
                 for (DocumentChange documentChange : value.getDocumentChanges()) {
                     if (documentChange.getType() == DocumentChange.Type.ADDED) {
 
-                        newsModelArrayList.add(documentChange.getDocument().toObject(AddNew.class));
+                        newsModelArrayList.add(documentChange.getDocument().
+                                toObject(AddNew.class));
 
                     }
+
                     mUploadNewAdapter.notifyDataSetChanged();
                     if (progressDialog.isShowing()) {
                         progressDialog.dismiss();

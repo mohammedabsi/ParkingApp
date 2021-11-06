@@ -21,6 +21,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -30,6 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton StudentRadioButton, TeacherRadioButton;
     private ProgressBar progressBarRegister;
     ConstraintLayout registerConstraintLayout;
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
     }
 
-    public void goHome() {
+    public void goHomeActivity() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
@@ -114,14 +119,9 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
-
                 if (task.isSuccessful()) {
-
-
                     if (studentrad == true) {
-                        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-                        User studentSide = new User(username, user_id, password, email, false);
+                        User studentSide = new User(username, user_id, password, email, true, 0);
 
                         firestore.collection("Student Side").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(studentSide).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -130,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Register success :)", Toast.LENGTH_SHORT).show();
                                     progressBarRegister.setVisibility(View.VISIBLE);
                                     progressBarRegister.setVisibility(View.GONE);
-                                    goHome();
+                                    goHomeActivity();
                                 } else {
                                     Toast.makeText(RegisterActivity.this, "Register Failed :(", Toast.LENGTH_SHORT).show();
 
@@ -144,10 +144,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                     } else if (TeacherRadioButton.isChecked()) {
 
-                        User teacherSide = new User(username, user_id, password, email, true);
+                        User teacherSide = new User(username, user_id, password, email, false, 1);
                         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-                        firestore.collection("Teacher_Side").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(teacherSide).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firestore.collection("Teacher_Side").document(email).set(teacherSide).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -155,7 +155,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     progressBarRegister.setVisibility(View.GONE);
 
                                     // todo : it should return to the Home screen ;)
-                                    goHome();
+                                    goHomeActivity();
                                 } else {
                                     Snackbar snackbar = Snackbar.make(registerConstraintLayout, "Register  Failed , try again", Snackbar.LENGTH_LONG);
                                     snackbar.show();

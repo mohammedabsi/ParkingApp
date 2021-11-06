@@ -97,7 +97,7 @@
             android:background="@drawable/textfield_blural"
             android:gravity="start|center"
 
-            android:inputType="phone" />
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -123,7 +123,6 @@
             android:layout_height="match_parent"
             android:background="@drawable/textfield_blural"
             android:gravity="start|center"
-
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 

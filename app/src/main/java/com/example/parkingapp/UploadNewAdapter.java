@@ -35,8 +35,7 @@ public class UploadNewAdapter extends RecyclerView.Adapter<UploadNewAdapter.Imag
     @NonNull
     private Context mContext;
     private ArrayList<AddNew> addNew;
-   FirebaseStorage mStorageRef = FirebaseStorage.getInstance();
-   FirebaseFirestore mfirebaseFirestore = FirebaseFirestore.getInstance();
+
 
 
     public UploadNewAdapter(Context context, ArrayList<AddNew> mAddNew) {
@@ -63,11 +62,6 @@ public class UploadNewAdapter extends RecyclerView.Adapter<UploadNewAdapter.Imag
         Glide.with(mContext).load(ImageUrl).into(holder.news_img);
 
 
-//        Picasso.get()
-//                .load(addNewCurrent.getImgsource())
-//                .fit()
-//                .centerCrop()
-//                .into(holder.news_img);
 
 
     }

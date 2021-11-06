@@ -94,15 +94,17 @@ public class ProfileFragment extends Fragment {
         progressBarprofile = v.findViewById(R.id.progressBarprofile);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+
         String currentid = user.getUid();
         String currentemail= user.getEmail();
         DocumentReference reference1 , reference2;
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
         progressBarprofile.setVisibility(View.VISIBLE);
 
         reference1 = firestore.collection("Student Side").document(currentid);
-        reference2 = firestore.collection("Teacher_Side").document(currentid);
+        reference2 = firestore.collection("Teacher_Side").document(currentemail);
         reference1.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -135,8 +137,15 @@ public class ProfileFragment extends Fragment {
                             password_profile.setText(passwordResult);
                             id_profile.setText(userIdResult);
                             progressBarprofile.setVisibility(View.INVISIBLE);
+                            //todo : second try
+//                            Boolean x = task2.getResult().getBoolean("type_s");
+//                            if (x ==false ){
+//
+//
+//                            }
                         }
                     });
+
                   //  Toast.makeText(getActivity(), "user is not signed" + currentid, Toast.LENGTH_SHORT).show();
                     progressBarprofile.setVisibility(View.INVISIBLE);
 

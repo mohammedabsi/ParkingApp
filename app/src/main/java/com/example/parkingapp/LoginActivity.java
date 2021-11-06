@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if (task.isSuccessful()) {
                     if (email.equalsIgnoreCase("admin@admin.com") && password.equalsIgnoreCase("admin123")) {
 

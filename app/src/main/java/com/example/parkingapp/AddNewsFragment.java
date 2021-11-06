@@ -175,7 +175,7 @@ public class AddNewsFragment extends Fragment {
 
                                             } else {
                                                 progressBarAdminAddnews.setVisibility(View.GONE);
-                                                Toast.makeText(getActivity(), "Register success :)", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getActivity(), "News failed to upload", Toast.LENGTH_SHORT).show();
 
 
                                             }

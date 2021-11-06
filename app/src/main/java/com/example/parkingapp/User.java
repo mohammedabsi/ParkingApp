@@ -1,19 +1,22 @@
 package com.example.parkingapp;
 
 public class User {
-    public String  username , email , password , userId  ;
-    public Boolean type ;
-    public User (){
+    public String username, email, password, userId;
+    public Boolean type_s ;
+    public int status_s;
+
+    public User() {
 
     }
-    public User(String username ,String userId, String password ,String  email , Boolean type ){
-     this.username = username ;
-        this.userId = userId ;
-        this.password = password ;
-     this.email = email ;
 
+    public User(String username, String userId, String password, String email, Boolean type_s , int status_s) {
+        this.username = username;
+        this.userId = userId;
+        this.password = password;
+        this.email = email;
+        this.type_s = type_s;
+        this.status_s = status_s;
 
-     this.type = type ;
 
     }
 
@@ -49,11 +52,19 @@ public class User {
         this.userId = userId;
     }
 
-    public Boolean getType() {
-        return type;
+    public Boolean getType_s() {
+        return type_s;
     }
 
-    public void setType(Boolean type) {
-        this.type = type;
+    public void setType_s(Boolean type) {
+        this.type_s = type_s;
+    }
+
+    public int getStatus_s() {
+        return status_s;
+    }
+
+    public void setStatus_s(int status) {
+        this.status_s = status_s;
     }
 }

@@ -1,9 +1,9 @@
 package com.example.parkingapp;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,15 +13,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,19 +87,21 @@ public class AcceptRequestFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_accept_request, container, false);
         accept_requests_recycler = view.findViewById(R.id.accept_requests_recycler);
         accept_requests_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-       progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching data");
         progressDialog.show();
         accept_requests_recycler.setHasFixedSize(true);
-
+        List<String> keys = new ArrayList<>();
 
         firestore = FirebaseFirestore.getInstance();
         requestUserArrayList = new ArrayList<User>();
-        RetrieveDataFirestore();
-        requestsAdapter = new RequestsAdapter(getActivity().getApplicationContext(), requestUserArrayList);
-        accept_requests_recycler.setAdapter(requestsAdapter);
 
+
+
+        RetrieveDataFirestore();
+        requestsAdapter = new RequestsAdapter(getActivity().getApplicationContext(), requestUserArrayList, keys, firestore);
+        accept_requests_recycler.setAdapter(requestsAdapter);
 
         return view;
     }
