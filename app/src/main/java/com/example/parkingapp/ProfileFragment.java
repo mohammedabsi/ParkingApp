@@ -103,7 +103,7 @@ public class ProfileFragment extends Fragment {
 
         progressBarprofile.setVisibility(View.VISIBLE);
 
-        reference1 = firestore.collection("Student Side").document(currentid);
+        reference1 = firestore.collection("Student_Side").document(currentemail);
         reference2 = firestore.collection("Teacher_Side").document(currentemail);
         reference1.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

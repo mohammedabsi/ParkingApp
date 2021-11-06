@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private TextInputEditText username_reg, user_id_reg, password_reg, email_reg;
-    private RadioButton StudentRadioButton, TeacherRadioButton ,guestRadioButton;
+    private RadioButton StudentRadioButton, TeacherRadioButton, guestRadioButton;
     private ProgressBar progressBarRegister;
     ConstraintLayout registerConstraintLayout;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -54,6 +55,29 @@ public class RegisterActivity extends AppCompatActivity {
         guestRadioButton = findViewById(R.id.guestRadioButton);
         progressBarRegister = findViewById(R.id.progressBarRegister);
         registerConstraintLayout = findViewById(R.id.registerConstraintLayout);
+
+        guestRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (guestRadioButton.isChecked()){
+                    user_id_reg.setText("Visitors dont have University ID");
+                    user_id_reg.setTextColor(getResources().getColor(R.color.lightblue));
+                  user_id_reg.setEnabled(false);
+
+                }else {
+                    user_id_reg.setText("");
+                    user_id_reg.setTextColor(getResources().getColor(R.color.black));
+
+//                    user_id_reg.setClickable(true);
+//                    user_id_reg.setFocusable(true);
+                    user_id_reg.setEnabled(true);
+
+
+                }
+            }
+        });
+
+
 
 
     }
@@ -93,13 +117,15 @@ public class RegisterActivity extends AppCompatActivity {
             user_id_reg.requestFocus();
             return;
         }
-        if (studentrad == false && teacherrad == false &&guestrad == false) {
+        if (studentrad == false && teacherrad == false && guestrad == false) {
 
             TeacherRadioButton.setError("");
             StudentRadioButton.setError("");
 
 
-        } else {
+        }
+
+            else {
             TeacherRadioButton.setError(null);
             StudentRadioButton.setError(null);
 
@@ -125,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (studentrad == true) {
                         User studentSide = new User(username, user_id, password, email, true, 0);
 
-                        firestore.collection("Student Side").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(studentSide).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firestore.collection("Student_Side").document(email).set(studentSide).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -169,8 +195,9 @@ public class RegisterActivity extends AppCompatActivity {
                         });
 
 
-                    }else if (guestRadioButton.isChecked()){
-                        User GuestSide = new User(username, user_id, password, email, true, 2);
+                    } else if (guestRadioButton.isChecked()) {
+
+                        User GuestSide = new User(username, "none", password, email, true, 2);
                         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
                         firestore.collection("Guest_Side").document(email).set(GuestSide).addOnCompleteListener(new OnCompleteListener<Void>() {

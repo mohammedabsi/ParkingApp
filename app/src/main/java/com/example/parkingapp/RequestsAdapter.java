@@ -44,7 +44,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     public RequestsAdapter.RequestsviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(context).inflate(R.layout.single_request_row, parent, false);
-
+        //notifyDataSetChanged();
 
         return new RequestsviewHolder(v);
 
@@ -57,35 +57,6 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         holder.teacher_id_req.setText(user.getUserId());
 
 
-        // int x = holder.getAdapterPosition();
-//        Toast.makeText(holder.itemView.getContext(), "key is " + keys.get(x), Toast.LENGTH_SHORT).show();
-
-//        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
-//        CollectionReference tasksRef = rootRef.collection("Teacher_Side");
-//        tasksRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    List<User> taskList = new ArrayList<>();
-//
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        User t = document.toObject(User.class);
-//                        taskList.add(t);
-//                        String key = document.getId();
-//                        keys.add(key);
-//
-//                    }
-//
-//
-//
-//                    //Create/notify the adapter
-//
-//
-//                }
-//            }
-//        });
-
-
         holder.accept_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +64,8 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
                 firestore.collection("Teacher_Side").document(user.getEmail()).update("type_s", true);
 
             }
-        });    holder.reject_req.setOnClickListener(new View.OnClickListener() {
+        });
+        holder.reject_req.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), holder.teacher_name_req.getText() + "\n is rejected :(", Toast.LENGTH_SHORT).show();
@@ -101,6 +73,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
 
             }
         });
+        //notifyItemChanged(holder.getAdapterPosition());
 
 
     }
@@ -122,7 +95,6 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
             teacher_id_req = itemView.findViewById(R.id.teacher_id_req);
             accept_req = itemView.findViewById(R.id.accept_req);
             reject_req = itemView.findViewById(R.id.reject_req);
-
 
 
         }
