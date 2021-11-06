@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private TextInputEditText username_reg, user_id_reg, password_reg, email_reg;
-    private RadioButton StudentRadioButton, TeacherRadioButton;
+    private RadioButton StudentRadioButton, TeacherRadioButton ,guestRadioButton;
     private ProgressBar progressBarRegister;
     ConstraintLayout registerConstraintLayout;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -51,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         email_reg = findViewById(R.id.email_reg);
         StudentRadioButton = findViewById(R.id.StudentRadioButton);
         TeacherRadioButton = findViewById(R.id.teacherRadioButton);
+        guestRadioButton = findViewById(R.id.guestRadioButton);
         progressBarRegister = findViewById(R.id.progressBarRegister);
         registerConstraintLayout = findViewById(R.id.registerConstraintLayout);
 
@@ -80,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         boolean studentrad = StudentRadioButton.isChecked();
         boolean teacherrad = TeacherRadioButton.isChecked();
+        boolean guestrad = guestRadioButton.isChecked();
 
         if (username.isEmpty()) {
             username_reg.setError("Empty Field");
@@ -91,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             user_id_reg.requestFocus();
             return;
         }
-        if (studentrad == false && teacherrad == false) {
+        if (studentrad == false && teacherrad == false &&guestrad == false) {
 
             TeacherRadioButton.setError("");
             StudentRadioButton.setError("");
@@ -166,6 +168,29 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
 
+
+                    }else if (guestRadioButton.isChecked()){
+                        User GuestSide = new User(username, user_id, password, email, true, 2);
+                        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+                        firestore.collection("Guest_Side").document(email).set(GuestSide).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(RegisterActivity.this, "Register success :)", Toast.LENGTH_SHORT).show();
+                                    progressBarRegister.setVisibility(View.GONE);
+
+                                    // todo : it should return to the Home screen ;)
+                                    goHomeActivity();
+                                } else {
+                                    Snackbar snackbar = Snackbar.make(registerConstraintLayout, "Register  Failed , try again", Snackbar.LENGTH_LONG);
+                                    snackbar.show();
+                                    progressBarRegister.setVisibility(View.GONE);
+
+
+                                }
+                            }
+                        });
 
                     }
 
