@@ -97,14 +97,15 @@ public class ProfileFragment extends Fragment {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
 
-        String currentid = user.getUid();
+       // String currentid = user.getUid();
         String currentemail= user.getEmail();
-        DocumentReference reference1 , reference2;
+        DocumentReference reference1 , reference2 ,reference3;
 
         progressBarprofile.setVisibility(View.VISIBLE);
 
         reference1 = firestore.collection("Student_Side").document(currentemail);
         reference2 = firestore.collection("Teacher_Side").document(currentemail);
+        reference3 = firestore.collection("Guest_Side").document(currentemail);
         reference1.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -123,7 +124,7 @@ public class ProfileFragment extends Fragment {
              
 
 
-                } else {
+                } else   {
                     reference2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
