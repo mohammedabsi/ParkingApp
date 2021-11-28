@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.util.Log;
@@ -40,7 +41,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final String TAG = "com.example.parkingapp";
 
-
+    SwipeRefreshLayout mSwipeRefreshLayout;
     ProgressBar parking_progressBar;
     RecyclerView parking_Recycler;
     LinearLayoutManager layoutManager;
@@ -97,25 +98,51 @@ public class HomeFragment extends Fragment {
         parking_Recycler.setLayoutManager(layoutManager);
         adapter = new ParkAdapter(parkClassList);
         parking_Recycler.setAdapter(adapter);
+        // SwipeRefreshLayout
+        mSwipeRefreshLayout =  view.findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                parkClassList.clear();
+                adapter.notifyDataSetChanged();
+                content();
+
+            }
+        });
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+
+                mSwipeRefreshLayout.setRefreshing(true);
+
+                // Fetching data from server
+                content();
+
+            }
+        });
 
 
-        content();
+
+
+
+
 
         return view;
     }
 
+
+
     public void content() {
-        parking_progressBar.setVisibility(View.VISIBLE);
-
-
+      //  parking_progressBar.setVisibility(View.VISIBLE);
+        mSwipeRefreshLayout.setRefreshing(true);
         RetrofitClient.getRetrofitClient().getPark().enqueue(new Callback<List<ParkClass>>() {
             @Override
             public void onResponse(Call<List<ParkClass>> call, Response<List<ParkClass>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     parkClassList.addAll(response.body());
                     adapter.notifyDataSetChanged();
-                    parking_progressBar.setVisibility(View.GONE);
-
+//                    parking_progressBar.setVisibility(View.GONE);
+                    mSwipeRefreshLayout.setRefreshing(false);
                     String res = "";
                     for (ParkClass parkclass : response.body()) {
                         res += parkclass.getId() + " " + parkclass.getStatus() + " " + "\n";
@@ -127,7 +154,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<ParkClass>> call, Throwable t) {
-                parking_progressBar.setVisibility(View.GONE);
+//                parking_progressBar.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(getActivity(), "Error is :" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
