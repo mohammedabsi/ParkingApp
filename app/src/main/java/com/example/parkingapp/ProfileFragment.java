@@ -132,7 +132,7 @@ public class ProfileFragment extends Fragment {
                             String emailResult = task2.getResult().getString("email");
                             String passwordResult = task2.getResult().getString("password");
                             String userIdResult = task2.getResult().getString("userId");
-                            profile_type.setText("Teacher");
+                            profile_type.setText("Faculty");
                             username_profile.setText(nameResult);
                             email_profile.setText(emailResult);
                             password_profile.setText(passwordResult);
@@ -147,7 +147,6 @@ public class ProfileFragment extends Fragment {
                         }
                     });
 
-                  //  Toast.makeText(getActivity(), "user is not signed" + currentid, Toast.LENGTH_SHORT).show();
                     progressBarprofile.setVisibility(View.INVISIBLE);
 
                 }

@@ -98,6 +98,8 @@ public class HomeFragment extends Fragment {
         parking_Recycler.setLayoutManager(layoutManager);
         adapter = new ParkAdapter(parkClassList);
         parking_Recycler.setAdapter(adapter);
+        parking_progressBar.setVisibility(View.VISIBLE);
+
         // SwipeRefreshLayout
         mSwipeRefreshLayout =  view.findViewById(R.id.swipe_container);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -114,9 +116,10 @@ public class HomeFragment extends Fragment {
             public void run() {
 
                 mSwipeRefreshLayout.setRefreshing(true);
-
                 // Fetching data from server
                 content();
+                parking_progressBar.setVisibility(View.VISIBLE);
+
 
             }
         });
@@ -141,7 +144,7 @@ public class HomeFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     parkClassList.addAll(response.body());
                     adapter.notifyDataSetChanged();
-//                    parking_progressBar.setVisibility(View.GONE);
+                    parking_progressBar.setVisibility(View.INVISIBLE);
                     mSwipeRefreshLayout.setRefreshing(false);
                     String res = "";
                     for (ParkClass parkclass : response.body()) {
@@ -154,25 +157,28 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<ParkClass>> call, Throwable t) {
-//                parking_progressBar.setVisibility(View.GONE);
+                parking_progressBar.setVisibility(View.INVISIBLE);
                 mSwipeRefreshLayout.setRefreshing(false);
+
                 Toast.makeText(getActivity(), "Error is :" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
-//        refresh(5000);
+        refresh(5000*30*5);
 
     }
 
-//    public void refresh(int milliseconds) {
-//        final Handler handler = new Handler();
-//        final Runnable runnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                content();
-//            }
-//        };
-//        handler.postDelayed(runnable, milliseconds);
-//
-//    }
+    public void refresh(int milliseconds) {
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                parkClassList.clear();
+                adapter.notifyDataSetChanged();
+                content();
+            }
+        };
+        handler.postDelayed(runnable, milliseconds);
+
+    }
 }

@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/onboard_3"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="40dp"
         android:adjustViewBounds="true"
         android:padding="5dp"
@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/park_logo_blue" />
+        app:srcCompat="@drawable/onboard3" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -43,7 +43,7 @@
 
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text=" Park Your Car"
+            android:text="@string/emoji"
             android:textColor="@color/lightblue"
             android:textSize="23sp"
             android:textStyle="bold" />

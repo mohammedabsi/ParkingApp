@@ -4,12 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -33,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     private FrameLayout home_fragment_container;
     private FirebaseFirestore firestore;
     private Fragment selectedFragment = null;
+    private Dialog dialog;
 
 
     @Override
@@ -45,6 +52,23 @@ public class HomeActivity extends AppCompatActivity {
 
         Toast.makeText(HomeActivity.this, "Login success", Toast.LENGTH_SHORT).show();
         bottomNavigationView = findViewById(R.id.bottomNavBar);
+        Context context;
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.fragment_pending);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_margin));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+        Button ok = dialog.findViewById(R.id.dialog_button);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(HomeActivity.this, "Log out success", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
 
 
         bottomNavigationView.setBackground(null);
@@ -54,41 +78,28 @@ public class HomeActivity extends AppCompatActivity {
 
         //I added this if statement to keep the selected fragment when rotating the device
         if (savedInstanceState == null) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String currentemail = user.getEmail();
+            DocumentReference dr = firestore.collection("Teacher_Side").document(currentemail);
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.getResult().exists()) {
+                        if (task.getResult().getBoolean("type_s") == false) {
+
+                            dialog.show();
+                        } else {
+                            dialog.dismiss();
+
+
+                        }
+                    }
+                }
+            });
             bottomNavigationView.getMenu().getItem(2).setChecked(true);
             getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment_container,
                     new ProfileFragment()).commit();
         }
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String currentemail = user.getEmail();
-        DocumentReference dr = firestore.collection("Teacher_Side").document(currentemail);
-
-        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.getResult().exists()) {
-                    if (task.getResult().getBoolean("type_s") == false) {
-
-//                        Fragment selectedFragment = new ProfileFragment();
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment_container,
-//                                selectedFragment).commit();
-                        bottomNavigationView.getMenu().getItem(0).setEnabled(false);
-                        bottomNavigationView.getMenu().getItem(1).setEnabled(false);
-
-
-                            Toast.makeText(HomeActivity.this, "wait for admin to approve your account", Toast.LENGTH_SHORT).show();
-
-
-                    }else {
-
-                        bottomNavigationView.getMenu().getItem(0).setEnabled(true);
-                        bottomNavigationView.getMenu().getItem(1).setEnabled(true);
-                        Toast.makeText(HomeActivity.this, "Account is approved welcome "+task.getResult().getString("username"), Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-            }
-        });
 
 
     }
@@ -105,7 +116,6 @@ public class HomeActivity extends AppCompatActivity {
                             selectedFragment = new NewsFragment();
                             break;
                         case R.id.nav_profile:
-
                             selectedFragment = new ProfileFragment();
                             break;
                         case R.id.nav_home:
@@ -142,4 +152,6 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

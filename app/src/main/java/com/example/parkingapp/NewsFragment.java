@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -40,7 +41,7 @@ public class NewsFragment extends Fragment {
     private UploadNewAdapter mUploadNewAdapter;
     private ArrayList<AddNew> newsModelArrayList;
     private FirebaseFirestore mFirebaseFirestore;
-    ProgressDialog progressDialog;
+    private ProgressBar NewsprogressBar;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -80,13 +81,10 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
         newsRecyclerView = view.findViewById(R.id.news_recyclerview);
+        NewsprogressBar = view.findViewById(R.id.NewsprogressBar);
 
         newsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Fetching data");
-        progressDialog.show();
-
+        NewsprogressBar.setVisibility(View.VISIBLE);
         newsRecyclerView.setHasFixedSize(true);
 
         mFirebaseFirestore = FirebaseFirestore.getInstance();
@@ -111,8 +109,9 @@ public class NewsFragment extends Fragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
-                    if (progressDialog.isShowing()) {
-                        progressDialog.dismiss();
+                    if (NewsprogressBar.isShown()) {
+                        NewsprogressBar.setVisibility(View.GONE);
+
                     }
                     Log.d("fireStore Error", error.getMessage().toString());
                     return;
@@ -126,8 +125,8 @@ public class NewsFragment extends Fragment {
                     }
 
                     mUploadNewAdapter.notifyDataSetChanged();
-                    if (progressDialog.isShowing()) {
-                        progressDialog.dismiss();
+                    if (NewsprogressBar.isShown()) {
+                        NewsprogressBar.setVisibility(View.GONE);
                     }
 
 

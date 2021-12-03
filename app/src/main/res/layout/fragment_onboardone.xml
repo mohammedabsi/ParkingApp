@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/onboard_3"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="40dp"
         android:adjustViewBounds="true"
         android:padding="5dp"
@@ -17,14 +17,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/park_logo_blue" />
+        app:srcCompat="@drawable/onboard1" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-
         android:elevation="5dp"
         android:orientation="vertical"
         android:padding="16dp"
@@ -42,7 +41,7 @@
 
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Search for parking"
+            android:text="Around Ksu Univestiy"
             android:textColor="@color/lightblue"
             android:textSize="23sp"
             android:textStyle="bold" />
@@ -54,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Search more than 50 parking spaces around the univercity"
+            android:text="Search more than 50 parking spaces around the university"
             android:textColor="@android:color/darker_gray"
 
             android:textSize="18sp" />

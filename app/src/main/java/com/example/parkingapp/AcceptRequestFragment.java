@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,8 +46,8 @@ public class AcceptRequestFragment extends Fragment {
     private RecyclerView accept_requests_recycler;
     ArrayList<User> requestUserArrayList;
     RequestsAdapter requestsAdapter;
+    ProgressBar AcceptReqsprogressBar;
     FirebaseFirestore firestore;
-    ProgressDialog progressDialog;
 
 
     public AcceptRequestFragment() {
@@ -86,11 +87,10 @@ public class AcceptRequestFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_accept_request, container, false);
         accept_requests_recycler = view.findViewById(R.id.accept_requests_recycler);
+        AcceptReqsprogressBar = view.findViewById(R.id.AcceptReqsprogressBar);
+        AcceptReqsprogressBar.setVisibility(View.VISIBLE);
         accept_requests_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Fetching data");
-        progressDialog.show();
+
         accept_requests_recycler.setHasFixedSize(true);
         List<String> keys = new ArrayList<>();
 
@@ -112,8 +112,8 @@ public class AcceptRequestFragment extends Fragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
-                    if (progressDialog.isShowing()) {
-                        progressDialog.dismiss();
+                    if (AcceptReqsprogressBar.isShown()) {
+                        AcceptReqsprogressBar.setVisibility(View.GONE);
                     }
                     Log.d("Fire Store Error", error.getMessage());
                     return;
@@ -125,8 +125,8 @@ public class AcceptRequestFragment extends Fragment {
 
                     }
                     requestsAdapter.notifyDataSetChanged();
-                    if (progressDialog.isShowing()) {
-                        progressDialog.dismiss();
+                    if (AcceptReqsprogressBar.isShown()) {
+                        AcceptReqsprogressBar.setVisibility(View.GONE);
                     }
 
                 }

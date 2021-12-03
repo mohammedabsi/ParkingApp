@@ -2,7 +2,7 @@
     <string name="app_name">Shagher</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="emoji">Lets Get Started ! &#128525;</string>
     <string-array name="news">
 
         <item>new1</item>

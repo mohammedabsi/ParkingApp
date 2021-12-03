@@ -37,7 +37,6 @@ public class UploadNewAdapter extends RecyclerView.Adapter<UploadNewAdapter.Imag
     private ArrayList<AddNew> addNew;
 
 
-
     public UploadNewAdapter(Context context, ArrayList<AddNew> mAddNew) {
         mContext = context;
         addNew = mAddNew;
@@ -58,10 +57,8 @@ public class UploadNewAdapter extends RecyclerView.Adapter<UploadNewAdapter.Imag
         holder.news_header.setText(addNewCurrent.header);
         holder.news_description.setText(addNewCurrent.descNew);
         String ImageUrl = addNewCurrent.getImgsource();
-
+        Log.d("img", ImageUrl);
         Glide.with(mContext).load(ImageUrl).into(holder.news_img);
-
-
 
 
     }
