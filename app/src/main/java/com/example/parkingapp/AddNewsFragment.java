@@ -106,6 +106,7 @@ public class AddNewsFragment extends Fragment {
         add_image = view.findViewById(R.id.add_image);
         progressBarAdminAddnews = view.findViewById(R.id.progressBarAdminAddnews);
         submit_news = view.findViewById(R.id.submit_news);
+
         mstorageReference = FirebaseStorage.getInstance().getReference("Uploads");
 
         add_image.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +120,7 @@ public class AddNewsFragment extends Fragment {
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(getActivity(), "Upload in progress", Toast.LENGTH_SHORT).show();
+
                 } else {
                     SubmitNews();
                 }
@@ -151,16 +153,18 @@ public class AddNewsFragment extends Fragment {
 //   toDO: CHECK img if exist or not
 //        if (imgNew == null ){}
         if (mImageUri != null) {
-            StorageReference fileref = mstorageReference.child(System.currentTimeMillis() + "." + getFileExtention(mImageUri));
-            mUploadTask = fileref
-                    .putFile(mImageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            final StorageReference fileref = mstorageReference.child(mImageUri.getLastPathSegment());
+            fileref.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressBarAdminAddnews.setVisibility(View.GONE);
-                            Toast.makeText(getActivity(), "file upload Success ", Toast.LENGTH_SHORT).show();
-                            AddNew addNew = new AddNew(add_news.getText().toString().trim(), add_description.getText().toString()
-                                    , taskSnapshot.getUploadSessionUri().toString());
+                        public void onSuccess(Uri uri) {
+                            String url = uri.toString();
+                            AddNew addNew = new AddNew(add_news.getText().toString().trim()
+                                    , add_description.getText().toString()
+                                    , url);
+
                             firestore.collection("News")
                                     .document()
                                     .set(addNew)
@@ -183,19 +187,20 @@ public class AddNewsFragment extends Fragment {
                                         }
                                     });
 
-
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getActivity(), "file upload failed : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                    progressBarAdminAddnews.setVisibility(View.VISIBLE);
+                    progressBarAdminAddnews.setVisibility(View.GONE);
+
+                    Toast.makeText(getActivity(), "News failed to upload", Toast.LENGTH_SHORT).show();
+
                 }
             });
+
+
         } else {
             add_image.requestFocus();
             add_image.setBackground(getResources().getDrawable(R.color.pink_light));
@@ -230,16 +235,6 @@ public class AddNewsFragment extends Fragment {
             Picasso.get().load(mImageUri).into(add_image);
         }
     }
-
-    private String getFileExtention(Uri uri) {
-        Context context;
-        ContentResolver cR = getActivity().getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
-
-    }
-
-
 
 
 }

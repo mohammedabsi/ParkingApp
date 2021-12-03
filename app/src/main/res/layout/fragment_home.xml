@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:hint="Hint : grey parks are reserved &amp; blue are empty   "
+            android:hint="Hint : grey's are reserved &amp; blue's are empty   "
             app:layout_constraintBottom_toTopOf="@+id/parking_progressBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -56,10 +56,9 @@ public class UploadNewAdapter extends RecyclerView.Adapter<UploadNewAdapter.Imag
         AddNew addNewCurrent = addNew.get(position);
         holder.news_header.setText(addNewCurrent.header);
         holder.news_description.setText(addNewCurrent.descNew);
-        String ImageUrl = addNewCurrent.getImgsource();
-        Log.d("img", ImageUrl);
-        Glide.with(mContext).load(ImageUrl).into(holder.news_img);
-
+        String ImageUrl = null;
+        ImageUrl = addNewCurrent.getImgsource();
+        Picasso.get().load(ImageUrl).into(holder.news_img);
 
     }
 
