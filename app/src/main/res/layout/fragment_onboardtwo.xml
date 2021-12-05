@@ -49,16 +49,6 @@
             android:textSize="23sp"
             android:textStyle="bold" />
 
-        <TextView
 
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="The app allow you to check the nearst empty parking to help you "
-            android:textColor="@android:color/darker_gray"
-
-            android:textSize="18sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
