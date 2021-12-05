@@ -2,23 +2,27 @@ package com.example.parkingapp;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +34,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -45,6 +52,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,6 +82,9 @@ public class ProfileFragment extends Fragment {
     DocumentReference userprofilenode = FirebaseFirestore.getInstance().collection("User").document(currentemail);
     DocumentReference userprofilenode2 = FirebaseFirestore.getInstance().collection("Teacher").document(currentemail);
     private static final int PICK_IMAGE_REQUEST = 1;
+    private Dialog dialog;
+    private ConstraintLayout profileParent;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -128,12 +139,73 @@ public class ProfileFragment extends Fragment {
         update_profile = v.findViewById(R.id.update_profile);
         progressBarprofile = v.findViewById(R.id.progressBarprofile);
         mImageView = v.findViewById(R.id.profile_photo);
+        profileParent = v.findViewById(R.id.profileParent);
         edit_image = v.findViewById(R.id.edit_image);
         update_profile = v.findViewById(R.id.update_profile);
 
 
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_updatepassword);
+        dialog.getWindow().setBackgroundDrawable(getActivity().getDrawable(R.drawable.dialog_margin));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        Button updatePassBtn = dialog.findViewById(R.id.updatePassBtn);
+        Button cancelUpdate = dialog.findViewById(R.id.cancelUpdate);
+        EditText oldPass = dialog.findViewById(R.id.oldPass);
+        EditText newPass = dialog.findViewById(R.id.newPass);
 
+        password_profile.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+            }
+        });
+        updatePassBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = user.getEmail();
+                String old_Pass = oldPass.getText().toString().trim();
+                String new_Pass = newPass.getText().toString().trim();
+                AuthCredential credential = EmailAuthProvider
+                        .getCredential(email, old_Pass);
 
+                user.reauthenticate(credential)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    user.updatePassword(new_Pass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                password_profile.setText(new_Pass);
+                                                Toast.makeText(getActivity(), "Password updated", Toast.LENGTH_SHORT).show();
+                                                Log.d("pas", "Password updated");
+                                                dialog.dismiss();
+                                            } else {
+                                                Toast.makeText(getActivity(), "Error password not updated", Toast.LENGTH_SHORT).show();
+                                                Log.d("pas", "Error password not updated");
+                                                dialog.dismiss();
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(getActivity(), "Error auth failed", Toast.LENGTH_SHORT).show();
+                                    Log.d("pas", "Error auth failed");
+                                    dialog.dismiss();
+
+                                }
+                            }
+                        });
+
+            }
+        });
+        cancelUpdate.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
 
         DocumentReference reference1, reference2;
@@ -244,10 +316,9 @@ public class ProfileFragment extends Fragment {
 
                 if (userState.equalsIgnoreCase("faculty")) {
                     if (mUploadTask != null && mUploadTask.isInProgress()) {
-                        Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getContext(), "update Done for Email and password only", Toast.LENGTH_SHORT).show();
+                        return ;
                     } else {
-                        Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
                         uploadFile2();
                     }
 
@@ -269,15 +340,17 @@ public class ProfileFragment extends Fragment {
 
                 } else {
                     if (mUploadTask != null && mUploadTask.isInProgress()) {
-                        Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "update Done for Email and password only", Toast.LENGTH_SHORT).show();
 
                     } else {
-                        Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "update Done for Email and password only", Toast.LENGTH_SHORT).show();
+
                         uploadFile();
                     }
                     userprofilenode.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+
                             progressBarprofile.setVisibility(View.INVISIBLE);
 
                         }
@@ -289,12 +362,9 @@ public class ProfileFragment extends Fragment {
                         }
                     });
                 }
-
+                updatePassword();
             }
         });
-
-
-
 
 
         return v;
@@ -415,6 +485,36 @@ public class ProfileFragment extends Fragment {
             nImageUri = data.getData();
             Picasso.get().load(nImageUri).into(mImageView);
         }
+    }
+
+    public void updatePassword() {
+        final String email = user.getEmail();
+
+        String newPass = password_profile.getText().toString();
+        AuthCredential credential = EmailAuthProvider
+                .getCredential(email, newPass);
+
+// Prompt the user to re-provide their sign-in credentials
+        user.reauthenticate(credential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            user.updatePassword(newPass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("password", "Password updated");
+                                    } else {
+                                        Log.d("password", "Error password not updated");
+                                    }
+                                }
+                            });
+                        } else {
+                            Log.d("password", "Error auth failed");
+                        }
+                    }
+                });
     }
 
 
