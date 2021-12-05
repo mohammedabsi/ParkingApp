@@ -179,11 +179,11 @@ public class ProfileFragment extends Fragment {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 password_profile.setText(new_Pass);
-                                                Toast.makeText(getActivity(), "Password updated", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getActivity(), "Password Changed ", Toast.LENGTH_SHORT).show();
                                                 Log.d("pas", "Password updated");
                                                 dialog.dismiss();
                                             } else {
-                                                Toast.makeText(getActivity(), "Error password not updated", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getActivity(), "Error password not Changed", Toast.LENGTH_SHORT).show();
                                                 Log.d("pas", "Error password not updated");
                                                 dialog.dismiss();
                                             }
@@ -316,7 +316,7 @@ public class ProfileFragment extends Fragment {
 
                 if (userState.equalsIgnoreCase("faculty")) {
                     if (mUploadTask != null && mUploadTask.isInProgress()) {
-                        Toast.makeText(getContext(), "update Done for Email and password only", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "update Done for Email and password only :)", Toast.LENGTH_SHORT).show();
                         return ;
                     } else {
                         uploadFile2();
@@ -340,10 +340,10 @@ public class ProfileFragment extends Fragment {
 
                 } else {
                     if (mUploadTask != null && mUploadTask.isInProgress()) {
-                        Toast.makeText(getContext(), "update Done for Email and password only", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "update Done for Email and password only:)", Toast.LENGTH_SHORT).show();
 
                     } else {
-                        Toast.makeText(getContext(), "update Done for Email and password only", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "update Done for Email and password only:)", Toast.LENGTH_SHORT).show();
 
                         uploadFile();
                     }
@@ -352,6 +352,7 @@ public class ProfileFragment extends Fragment {
                         public void onSuccess(Void aVoid) {
 
                             progressBarprofile.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getContext(), "Update is success", Toast.LENGTH_LONG).show();
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -362,7 +363,6 @@ public class ProfileFragment extends Fragment {
                         }
                     });
                 }
-                updatePassword();
             }
         });
 
@@ -414,7 +414,6 @@ public class ProfileFragment extends Fragment {
                         }
                     });
         } else {
-//            Toast.makeText(this, "No file selected For Image", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -487,35 +486,7 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    public void updatePassword() {
-        final String email = user.getEmail();
 
-        String newPass = password_profile.getText().toString();
-        AuthCredential credential = EmailAuthProvider
-                .getCredential(email, newPass);
-
-// Prompt the user to re-provide their sign-in credentials
-        user.reauthenticate(credential)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            user.updatePassword(newPass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.d("password", "Password updated");
-                                    } else {
-                                        Log.d("password", "Error password not updated");
-                                    }
-                                }
-                            });
-                        } else {
-                            Log.d("password", "Error auth failed");
-                        }
-                    }
-                });
-    }
 
 
 }
