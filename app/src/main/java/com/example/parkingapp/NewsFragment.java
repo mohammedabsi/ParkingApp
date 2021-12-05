@@ -91,12 +91,10 @@ public class NewsFragment extends Fragment {
         newsModelArrayList = new ArrayList<AddNew>();
 
 
-
         RetrieveNewsData();
+
         mUploadNewAdapter = new UploadNewAdapter(getActivity().getApplicationContext(), newsModelArrayList);
         newsRecyclerView.setAdapter(mUploadNewAdapter);
-
-
 
 
 
@@ -114,6 +112,8 @@ public class NewsFragment extends Fragment {
 
                     }
                     Log.d("fireStore Error", error.getMessage().toString());
+                    NewsprogressBar.setVisibility(View.GONE);
+
                     return;
                 }
                 for (DocumentChange documentChange : value.getDocumentChanges()) {
@@ -121,6 +121,8 @@ public class NewsFragment extends Fragment {
 
                         newsModelArrayList.add(documentChange.getDocument().
                                 toObject(AddNew.class));
+                        NewsprogressBar.setVisibility(View.GONE);
+
 
                     }
 
@@ -130,11 +132,18 @@ public class NewsFragment extends Fragment {
                     }
 
 
+
+
+
                 }
+
 
 
             }
         });
+        if (newsModelArrayList.isEmpty()){
+            NewsprogressBar.setVisibility(View.GONE);
 
+        }
     }
 }

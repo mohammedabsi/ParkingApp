@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String currentemail = user.getEmail();
-            DocumentReference dr = firestore.collection("Teacher_Side").document(currentemail);
+            DocumentReference dr = firestore.collection("Teacher").document(currentemail);
             dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

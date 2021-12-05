@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#F6F5F5"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavBar"
         app:layout_constraintTop_toTopOf="parent" />
 

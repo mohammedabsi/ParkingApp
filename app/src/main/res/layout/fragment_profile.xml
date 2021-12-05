@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:layout_margin="8dp"
     android:padding="5dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".ProfileFragment">
 
 
@@ -50,8 +52,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Type:"
+        android:layout_marginTop="16dp"
         android:textColor="@color/lightpurple"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 
@@ -82,10 +84,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:elevation="5dp"
-
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
         app:startIconDrawable="@drawable/ic_email"
         app:startIconTint="@color/darkgrey"
         tools:layout_editor_absoluteX="5dp">
@@ -109,8 +110,8 @@
 
         android:layout_height="wrap_content"
 
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/darkgrey"
         app:startIconDrawable="@drawable/ic_lock"
@@ -168,7 +169,7 @@
             android:elevation="5dp"
             android:layout_gravity="center"
             android:padding="5dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:text="update profile"
             android:textColor="@android:color/white"
             android:textSize="12sp" />

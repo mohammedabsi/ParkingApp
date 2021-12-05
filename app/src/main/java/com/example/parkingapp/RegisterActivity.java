@@ -151,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (studentrad == true) {
                         User studentSide = new User(username, user_id, password, email, true, 0);
 
-                        firestore.collection("Student_Side").document(email).set(studentSide).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firestore.collection("User").document(email).set(studentSide).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -175,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
                         User teacherSide = new User(username, user_id, password, email, false, 1);
                         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-                        firestore.collection("Teacher_Side").document(email).set(teacherSide).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firestore.collection("Teacher").document(email).set(teacherSide).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -200,7 +200,7 @@ public class RegisterActivity extends AppCompatActivity {
                         User GuestSide = new User(username, "none", password, email, true, 2);
                         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-                        firestore.collection("Guest_Side").document(email).set(GuestSide).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        firestore.collection("User").document(email).set(GuestSide).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {

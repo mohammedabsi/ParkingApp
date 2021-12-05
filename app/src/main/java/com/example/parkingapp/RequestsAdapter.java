@@ -61,7 +61,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), holder.teacher_name_req.getText() + "\n is accepted :)", Toast.LENGTH_SHORT).show();
-                firestore.collection("Teacher_Side").document(user.getEmail()).update("type_s", true);
+                firestore.collection("Teacher").document(user.getEmail()).update("type_s", true);
 
             }
         });
@@ -69,7 +69,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), holder.teacher_name_req.getText() + "\n is rejected :(", Toast.LENGTH_SHORT).show();
-                firestore.collection("Teacher_Side").document(user.getEmail()).update("type_s", false);
+                firestore.collection("Teacher").document(user.getEmail()).update("type_s", false);
 
             }
         });

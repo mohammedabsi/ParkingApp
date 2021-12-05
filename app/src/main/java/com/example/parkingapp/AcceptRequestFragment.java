@@ -108,7 +108,7 @@ public class AcceptRequestFragment extends Fragment {
 
     private void RetrieveDataFirestore() {
 
-        firestore.collection("Teacher_Side").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        firestore.collection("Teacher").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {

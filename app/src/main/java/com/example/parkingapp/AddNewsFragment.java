@@ -132,6 +132,7 @@ public class AddNewsFragment extends Fragment {
     }
 
     private void SubmitNews() {
+        progressBarAdminAddnews.setVisibility(View.VISIBLE);
 
         String headerNew = add_news.getText().toString().trim();
         String descNew = add_description.getText().toString().trim();
@@ -143,11 +144,15 @@ public class AddNewsFragment extends Fragment {
         if (headerNew.isEmpty()) {
             add_news.setError("Empty Field");
             add_news.requestFocus();
+            progressBarAdminAddnews.setVisibility(View.GONE);
+
             return;
         }
         if (descNew.isEmpty()) {
             add_description.setError("Empty Field");
             add_description.requestFocus();
+            progressBarAdminAddnews.setVisibility(View.GONE);
+
             return;
         }
 //   toDO: CHECK img if exist or not
@@ -173,14 +178,14 @@ public class AddNewsFragment extends Fragment {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             progressBarAdminAddnews.setVisibility(View.VISIBLE);
                                             if (task.isSuccessful()) {
-                                                progressBarAdminAddnews.setVisibility(View.GONE);
                                                 Toast.makeText(getActivity(), "News Added", Toast.LENGTH_SHORT).show();
+                                                progressBarAdminAddnews.setVisibility(View.GONE);
 
 
                                             } else {
-                                                progressBarAdminAddnews.setVisibility(View.GONE);
                                                 Toast.makeText(getActivity(), "News failed to upload", Toast.LENGTH_SHORT).show();
 
+                                                progressBarAdminAddnews.setVisibility(View.GONE);
 
                                             }
 
@@ -193,9 +198,9 @@ public class AddNewsFragment extends Fragment {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    progressBarAdminAddnews.setVisibility(View.GONE);
 
                     Toast.makeText(getActivity(), "News failed to upload", Toast.LENGTH_SHORT).show();
+                    progressBarAdminAddnews.setVisibility(View.GONE);
 
                 }
             });
