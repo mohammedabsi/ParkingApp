@@ -127,7 +127,7 @@
                 android:button="@android:color/transparent"
                 android:elevation="5dp"
                 android:padding="5dp"
-                android:text="Teacher"
+                android:text="Faculty"
                 android:textColor="@drawable/text_selector_color" />
 
             <RadioButton

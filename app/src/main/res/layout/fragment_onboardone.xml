@@ -41,7 +41,7 @@
 
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Around Ksu Univestiy"
+            android:text="search for Parking"
             android:textColor="@color/lightblue"
             android:textSize="23sp"
             android:textStyle="bold" />
@@ -53,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="KSU"
+            android:text="Search more than 50 parking space's
+\n around the KSU university"
             android:textColor="@android:color/darker_gray"
 
             android:textSize="18sp" />

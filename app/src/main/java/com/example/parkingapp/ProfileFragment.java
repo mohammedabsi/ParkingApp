@@ -105,7 +105,6 @@ public class ProfileFragment extends Fragment {
 
         reference1 = firestore.collection("Student_Side").document(currentemail);
         reference2 = firestore.collection("Teacher_Side").document(currentemail);
-        reference3 = firestore.collection("Guest_Side").document(currentemail);
         reference1.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
